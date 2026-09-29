@@ -1,9 +1,26 @@
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Pool;
 
 public class Collectible : MonoBehaviour
 {
     public float rotateSpeed;
     public float dropSpeed;
+
+    public UnityEvent OnSunCollected;
+    
+    IObjectPool<Collectible> sunPool;
+
+
+    void OnEnable()
+    {
+        OnSunCollected.AddListener(GameManager.Instance.AddSun);
+    }
+
+    void OnDisable()
+    {
+        OnSunCollected.RemoveListener(GameManager.Instance.AddSun);
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,7 +45,18 @@ public class Collectible : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            CollectSun();
         }
+    }
+
+    public void SetSunPool(IObjectPool<Collectible> newPool)
+    {
+        sunPool = newPool;
+    }
+
+    public void CollectSun()
+    {
+        OnSunCollected.Invoke();
+        sunPool.Release(this);
     }
 }
