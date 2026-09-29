@@ -4,6 +4,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public TMP_Text sunCountText;
+    public TMP_Text promptText;
 
 
     void OnEnable()
@@ -31,5 +32,10 @@ public class UIManager : MonoBehaviour
     void UpdateSunCount(int amount)
     {
         sunCountText.text = amount.ToString();
+    }
+
+    public void UpdatePromptText(string message)
+    {
+        promptText.text = message;
     }
 }

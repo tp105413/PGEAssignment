@@ -24,7 +24,7 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.isWaveRunning) return;
+        if (!GameManager.Instance.isWaveRunning) return;
 
         if(spawnSunTimer < 0f)
         {

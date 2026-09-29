@@ -33,7 +33,7 @@ public class Collectible : MonoBehaviour
     {
         transform.Rotate(0f, rotateSpeed * Time.deltaTime, 0f);
 
-        if(transform.position.y > 0.5f)
+        if(transform.position.y > 1f)
         {
             Vector3 newPosition = transform.position;
             newPosition.y -= dropSpeed * Time.deltaTime;
