@@ -6,6 +6,7 @@ public class PlayerInteract : MonoBehaviour
     public Camera cam;
     public float distance = 3f;
     public LayerMask mask;
+    public GameObject prefabTemp;
 
     public UIManager uImanager;
 
@@ -39,7 +40,8 @@ public class PlayerInteract : MonoBehaviour
                     // Left click to interact
                     if (Mouse.current.leftButton.wasPressedThisFrame)
                     {
-                        interactable.BasicInteract();
+                        interactable.BasicInteract(prefabTemp, hitInfo.point);
+                        //Instantiate(prefabTemp, hitInfo.point, Quaternion.identity);
                     }
                 }
             }

@@ -18,6 +18,8 @@ public class BuildZone : Interactable
     {
         // Interact actions
         GameManager.Instance.AddSun();
+        Instantiate(towerPrefab, buildPosition, Quaternion.identity);
+        GameManager.Instance.isHoldingItem = false;
     }
 
     public override bool CanInteract()
