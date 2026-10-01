@@ -6,7 +6,7 @@ public class PlayerInteract : MonoBehaviour
     public Camera cam;
     public float distance = 3f;
     public LayerMask mask;
-    public GameObject prefabTemp;
+    public GameObject itemPrefab;
 
     public UIManager uImanager;
 
@@ -40,11 +40,15 @@ public class PlayerInteract : MonoBehaviour
                     // Left click to interact
                     if (Mouse.current.leftButton.wasPressedThisFrame)
                     {
-                        interactable.BasicInteract(prefabTemp, hitInfo.point);
-                        //Instantiate(prefabTemp, hitInfo.point, Quaternion.identity);
+                        interactable.BasicInteract(itemPrefab, hitInfo.point);
                     }
                 }
             }
         }
+    }
+
+    public void SetTowerPrefab(GameObject prefab)
+    {
+        itemPrefab = prefab;
     }
 }

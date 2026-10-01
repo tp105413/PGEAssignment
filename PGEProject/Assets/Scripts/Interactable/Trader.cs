@@ -2,6 +2,19 @@ using UnityEngine;
 
 public class Trader : Interactable
 {
+    public enum TraderType
+    {
+        Pawn,
+        Rook,
+        Bishop
+    }
+
+    public GameObject towerTypePrefab;
+    public int towerCost;
+
+    public PlayerInteract playerInteract;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,11 +29,11 @@ public class Trader : Interactable
 
     protected override void Interact()
     {
-        if(GameManager.Instance.sunCount >= 200)
+        if(GameManager.Instance.sunCount >= towerCost)
         {
-            // Buy Pawn Tower
-            GameManager.Instance.SpendSun(200);
+            GameManager.Instance.SpendSun(towerCost);
             GameManager.Instance.isHoldingItem = true;
+            playerInteract.SetTowerPrefab(towerTypePrefab);
         }
     }
 
