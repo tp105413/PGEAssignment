@@ -9,21 +9,18 @@ public class EnemySpawner : MonoBehaviour
     public float spawnInterval = 16f;
 
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
         if (!GameManager.Instance.isWaveRunning) return;
 
+        // Nothing to spawn
+        if (GameManager.Instance.enemyCount <= 0) return;
+
         if (spawnEnemyTimer < 0f)
         {
             SpawnEnemy();
+            GameManager.Instance.enemyCount--;
             spawnEnemyTimer = spawnInterval;
         }
         else
@@ -37,6 +34,10 @@ public class EnemySpawner : MonoBehaviour
         int randomIndex = Random.Range(0, spawners.Length);
 
         Transform spawner = spawners[randomIndex];
-        Instantiate(enemyPrefab, spawner.position, spawner.rotation);
+        GameObject obj = Instantiate(enemyPrefab, spawner.position, spawner.rotation);
+        Enemy enemy = obj.GetComponent<Enemy>();
+
+        // After spawn enemy set its stats
+        enemy.SetLevel(GameManager.Instance.level);
     }
 }

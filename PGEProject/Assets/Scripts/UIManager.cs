@@ -66,4 +66,23 @@ public class UIManager : MonoBehaviour
     {
         gameOverText.gameObject.SetActive(true);
     }
+
+    public void UpdateGeneralUI()
+    {
+        if(GameManager.Instance.level == 0)
+        {
+            Tutorial();
+            enemyCountText.text = GameManager.Instance.enemyCount.ToString();
+        }
+        else
+        {
+            levelText.text = "Lv." + GameManager.Instance.level;
+            enemyCountText.text = GameManager.Instance.enemyCount.ToString();
+        }
+    }
+
+    void Tutorial()
+    {
+        // Show tutorial
+    }
 }

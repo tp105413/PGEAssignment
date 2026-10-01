@@ -42,6 +42,7 @@ public class PlayerInteract : MonoBehaviour
         }
     }
 
+    // Set tower prefab to hand
     public void SetTowerPrefab(GameObject prefab)
     {
         itemPrefab = prefab;

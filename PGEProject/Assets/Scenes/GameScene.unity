@@ -502,11 +502,11 @@ Transform:
   m_GameObject: {fileID: 251978788}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 100, y: -25.5, z: 0}
   m_LocalScale: {x: 200, y: 1, z: 200}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1511113362}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &275312054
 GameObject:
@@ -2395,8 +2395,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026431967}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -100, y: 25, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2404,7 +2404,7 @@ Transform:
   - {fileID: 910078294}
   - {fileID: 2100760347}
   - {fileID: 960329761}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1511113362}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1032554210
 GameObject:
@@ -2469,7 +2469,7 @@ MonoBehaviour:
   - {fileID: 2098780237}
   - {fileID: 2082455053}
   spawnEnemyTimer: 20
-  spawnInterval: 12
+  spawnInterval: 16
 --- !u!1 &1036852502
 GameObject:
   m_ObjectHideFlags: 0
@@ -3601,6 +3601,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470638060}
   m_CullTransparentMesh: 1
+--- !u!1 &1511113361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1511113362}
+  m_Layer: 0
+  m_Name: Environment
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1511113362
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511113361}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -100, y: 25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 251978792}
+  - {fileID: 1026431968}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1545274477
 GameObject:
   m_ObjectHideFlags: 0
@@ -4171,11 +4204,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08dab97005b59f24897dd6a808b7d16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  enemySpawner: {fileID: 1032554212}
   isWaveRunning: 0
   isHoldingItem: 0
   level: 0
   sunCount: 100
   enemyCount: 3
+  enemyRemaining: 0
 --- !u!1 &1750965558
 GameObject:
   m_ObjectHideFlags: 0
@@ -5783,11 +5818,10 @@ SceneRoots:
   - {fileID: 1950329949}
   - {fileID: 1670175465}
   - {fileID: 88963609}
-  - {fileID: 251978792}
-  - {fileID: 1026431968}
   - {fileID: 184123334}
+  - {fileID: 1032554211}
   - {fileID: 710500340}
   - {fileID: 620676725}
   - {fileID: 1758761188}
   - {fileID: 860083443}
-  - {fileID: 1032554211}
+  - {fileID: 1511113362}
