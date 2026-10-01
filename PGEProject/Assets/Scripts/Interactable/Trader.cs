@@ -2,15 +2,9 @@ using UnityEngine;
 
 public class Trader : Interactable
 {
-    public enum TraderType
-    {
-        Pawn,
-        Rook,
-        Bishop
-    }
-
     public GameObject towerTypePrefab;
     public int towerCost;
+    public string towerType;
 
     public PlayerInteract playerInteract;
 
@@ -29,11 +23,13 @@ public class Trader : Interactable
 
     protected override void Interact()
     {
+        // Buy tower from trader
         if(GameManager.Instance.sunCount >= towerCost)
         {
             GameManager.Instance.SpendSun(towerCost);
             GameManager.Instance.isHoldingItem = true;
             playerInteract.SetTowerPrefab(towerTypePrefab);
+            UIManager.Instance.ChangeHoldingItem(towerType);
         }
     }
 

@@ -16,10 +16,19 @@ public class BuildZone : Interactable
 
     protected override void Interact()
     {
-        // Interact actions
-        GameManager.Instance.AddSun();
-        Instantiate(towerPrefab, buildPosition, Quaternion.identity);
+        //Vector3 direction = buildPosition - Vector3.zero;
+        //direction.y = 0;
+
+        //float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+
+        //float snapped = Mathf.Round(angle / 45f) * 45f;
+
+        //Quaternion rotation = Quaternion.Euler(0, snapped, 0);
+
+        // Place tower
+        Instantiate(towerPrefab, buildPosition, transform.rotation);
         GameManager.Instance.isHoldingItem = false;
+        UIManager.Instance.itemHolded.SetActive(false);
     }
 
     public override bool CanInteract()

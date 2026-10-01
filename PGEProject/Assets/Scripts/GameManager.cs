@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     public int sunCount = 0;
 
     public static event Action<int> OnSunCountChanged;
-    public static event Action OnItemChanged;
 
 
     void Awake()

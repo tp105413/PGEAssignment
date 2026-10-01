@@ -3,8 +3,14 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance;
+
     public TMP_Text sunCountText;
     public TMP_Text promptText;
+    public GameObject itemHolded;
+    public Material PawnMaterial;
+    public Material RookMaterial;
+    public Material BishopMaterial;
 
 
     void OnEnable()
@@ -15,6 +21,11 @@ public class UIManager : MonoBehaviour
     void OnDisable()
     {
         GameManager.OnSunCountChanged -= UpdateSunCount;
+    }
+
+    void Awake()
+    {
+        Instance = this;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -37,5 +48,24 @@ public class UIManager : MonoBehaviour
     public void UpdatePromptText(string message)
     {
         promptText.text = message;
+    }
+
+    public void ChangeHoldingItem(string item)
+    {
+        if(item == "Pawn")
+        {
+            itemHolded.GetComponent<Renderer>().material = PawnMaterial;
+            itemHolded.SetActive(true);
+        }
+        else if(item == "Rook")
+        {
+            itemHolded.GetComponent<Renderer>().material = RookMaterial;
+            itemHolded.SetActive(true);
+        }
+        else if(item == "Bishop")
+        {
+            itemHolded.GetComponent<Renderer>().material = BishopMaterial;
+            itemHolded.SetActive(true);
+        }
     }
 }
