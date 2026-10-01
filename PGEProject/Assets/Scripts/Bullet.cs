@@ -5,8 +5,15 @@ public class Bullet : MonoBehaviour
 {
     public float flySpeed;
 
+    bool released;
+
     IObjectPool<Bullet> bulletPool;
 
+
+    void OnEnable()
+    {
+        released = false;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,13 +29,21 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (released) return;
+
         if (other.CompareTag("Enemy"))
         {
-            HitTarget();
+            Enemy enemy = other.GetComponentInParent<Enemy>();
+
+            if(enemy != null)
+            {
+                enemy.TakeDamage(20);
+                ReleaseBullet();
+            }
         }
         else if (other.CompareTag("Wall"))
         {
-            HitTarget();
+            ReleaseBullet();
         }
     }
 
@@ -37,8 +52,11 @@ public class Bullet : MonoBehaviour
         bulletPool = newPool;
     }
 
-    public void HitTarget()
+    public void ReleaseBullet()
     {
+        if (released) return;
+        released = true;
+
         bulletPool.Release(this);
     }
 }

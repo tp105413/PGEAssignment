@@ -1,16 +1,40 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Interactable
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public float health = 100f;
+    public float moveSpeed = 3f;
+
+    Rigidbody rb;
+
+
+    void Awake()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        Vector3 targetZone = new Vector3(0, transform.position.y, 0);
+        Vector3 direction = (targetZone - transform.position).normalized;
+
+        rb.linearVelocity = new Vector3(direction.x * moveSpeed, rb.linearVelocity.y, direction.z * moveSpeed);
+        transform.rotation = Quaternion.LookRotation(direction);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+
+        if(health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        GameManager.Instance.AddSun();
+        Destroy(gameObject);
     }
 }

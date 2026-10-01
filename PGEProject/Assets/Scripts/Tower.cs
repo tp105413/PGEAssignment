@@ -1,9 +1,10 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public enum FirePattern { Forward, Straight, Cross }
 
-public class BulletSpawner : MonoBehaviour
+public class Tower : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public float fireInterval = 1.4f;
@@ -80,6 +81,14 @@ public class BulletSpawner : MonoBehaviour
                 SpawnBullet(180f);
                 SpawnBullet(270f);
                 break;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
         }
     }
 }

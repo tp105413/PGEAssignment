@@ -6,7 +6,12 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     public TMP_Text sunCountText;
+    public TMP_Text enemyCountText;
+    public TMP_Text levelText;
     public TMP_Text promptText;
+    public TMP_Text gameOverText;
+
+
     public GameObject itemHolded;
     public Material PawnMaterial;
     public Material RookMaterial;
@@ -55,5 +60,10 @@ public class UIManager : MonoBehaviour
             itemHolded.GetComponent<Renderer>().material = BishopMaterial;
             itemHolded.SetActive(true);
         }
+    }
+
+    public void GameOverUI()
+    {
+        gameOverText.gameObject.SetActive(true);
     }
 }
