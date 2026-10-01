@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2013514514834739806}
   - component: {fileID: 4446140362657321294}
   - component: {fileID: 8777545912687260998}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 66403709860834845}
   - component: {fileID: 8226088386823739987}
   - component: {fileID: 352016944053546508}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 4503469418695521870}
   - component: {fileID: 6366103973479523190}
   - component: {fileID: 8359269400146318322}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 468080465571292363}
   - component: {fileID: 1480335658455835638}
   - component: {fileID: 8330559433581620412}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -316,8 +316,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feab7bc21a9a7a14c94518d37fb1a31f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  promptMessage: Push
   health: 100
   moveSpeed: 3
+  knockbackDuration: 0.5
 --- !u!54 &8330559433581620412
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -357,7 +359,7 @@ GameObject:
   - component: {fileID: 8891506843272552536}
   - component: {fileID: 6782155496390187347}
   - component: {fileID: 5307051968306721577}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyObj
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -475,7 +477,7 @@ GameObject:
   - component: {fileID: 7988598271075775488}
   - component: {fileID: 8152575073922026023}
   - component: {fileID: 7068274318362383165}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +567,7 @@ GameObject:
   - component: {fileID: 2601418528447097657}
   - component: {fileID: 3979442103481663460}
   - component: {fileID: 2480856236808871501}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}

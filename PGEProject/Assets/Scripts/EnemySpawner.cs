@@ -20,7 +20,6 @@ public class EnemySpawner : MonoBehaviour
         if (spawnEnemyTimer < 0f)
         {
             SpawnEnemy();
-            GameManager.Instance.enemyCount--;
             spawnEnemyTimer = spawnInterval;
         }
         else
@@ -35,9 +34,23 @@ public class EnemySpawner : MonoBehaviour
 
         Transform spawner = spawners[randomIndex];
         GameObject obj = Instantiate(enemyPrefab, spawner.position, spawner.rotation);
+        GameManager.Instance.enemyCount--;
         Enemy enemy = obj.GetComponent<Enemy>();
 
         // After spawn enemy set its stats
         enemy.SetLevel(GameManager.Instance.level);
+    }
+
+    public void SpawnNextEnemy()
+    {
+        // Keep the pace for tutorial
+        if (GameManager.Instance.level == 0) return;
+        if (!GameManager.Instance.isWaveRunning) return;
+        if (GameManager.Instance.enemyCount <= 0) return;
+
+        SpawnEnemy();
+
+        // Restart enemy spawn countdown
+        spawnEnemyTimer = spawnInterval;
     }
 }

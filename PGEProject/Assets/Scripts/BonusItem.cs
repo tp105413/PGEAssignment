@@ -7,17 +7,6 @@ public class BonusItem : Interactable
     public int cost;
     public ItemType itemType;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     protected override void Interact()
     {
@@ -34,7 +23,7 @@ public class BonusItem : Interactable
                 if (GameManager.Instance.sunCount >= cost)
                 {
                     GameManager.Instance.SpendSun(cost);
-                    // Add up player knockback to 10000
+                    GameManager.Instance.knockback = 1000f;
                 }
                 break;
         }

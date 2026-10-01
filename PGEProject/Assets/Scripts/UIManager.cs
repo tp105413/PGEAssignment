@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class UIManager : MonoBehaviour
     public TMP_Text winText;
     public Button mainMenuButton;
 
-
+    // Wave cleared UI
+    public CanvasGroup waveClearedText;
 
     public GameObject itemHolded;
     public Material PawnMaterial;
@@ -78,23 +80,59 @@ public class UIManager : MonoBehaviour
         mainMenuButton.gameObject.SetActive(true);
     }
 
-    public void UpdateGeneralUI()
+    public void UpdateLevelText()
     {
         if(GameManager.Instance.level == 0)
         {
             // Show tutorial if start the game first time
             Tutorial();
-            enemyCountText.text = GameManager.Instance.enemyCount.ToString();
         }
         else
         {
             levelText.text = "Lv." + GameManager.Instance.level;
-            enemyCountText.text = GameManager.Instance.enemyCount.ToString();
+        }
+    }
+
+    public void UpdateEnemyRemaining()
+    {
+        if (GameManager.Instance.level == 0)
+        {
+            enemyCountText.text = GameManager.Instance.enemyRemaining.ToString();
+        }
+        else
+        {
+            enemyCountText.text = GameManager.Instance.enemyRemaining.ToString();
         }
     }
 
     void Tutorial()
     {
         // Show tutorial
+    }
+
+    // Show wave cleared text with fade in and out
+    public void waveClearedFade()
+    {
+        StartCoroutine(StartFade());
+    }
+
+    private IEnumerator StartFade()
+    {
+        yield return StartCoroutine(Fade(0f, 1f));
+        yield return new WaitForSeconds(5f);
+        yield return StartCoroutine(Fade(1f, 0f));
+    }
+
+    private IEnumerator Fade(float start, float end)
+    {
+        float timer = 0f;
+
+        while (timer < 0.5f)
+        {
+            timer += Time.deltaTime;
+            waveClearedText.alpha = Mathf.Lerp(start, end, timer / 0.5f);
+            yield return null;
+        }
+        waveClearedText.alpha = end;
     }
 }

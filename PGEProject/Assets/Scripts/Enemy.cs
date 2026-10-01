@@ -4,7 +4,8 @@ public class Enemy : Interactable
 {
     public float health = 100f;
     public float moveSpeed = 3f;
-
+    public float knockbackDuration = 0.5f;
+    float knockbackTimer;
     bool isDead = false;
     Rigidbody rb;
 
@@ -16,6 +17,13 @@ public class Enemy : Interactable
 
     void FixedUpdate()
     {
+        // Pause enemy movement while getting hit by player
+        if(knockbackTimer > 0f)
+        {
+            knockbackTimer -= Time.deltaTime;
+            return;
+        }
+
         Vector3 targetZone = new Vector3(0, transform.position.y, 0);
         Vector3 direction = (targetZone - transform.position).normalized;
 
@@ -45,7 +53,7 @@ public class Enemy : Interactable
         GameManager.Instance.EnemiesDied();
         Destroy(gameObject);
 
-        UIManager.Instance.UpdateGeneralUI();
+        UIManager.Instance.UpdateEnemyRemaining();
     }
 
     public void SetLevel(int level)
@@ -55,5 +63,27 @@ public class Enemy : Interactable
 
         // Every 3 levels +1 move speed
         moveSpeed += (level / 3) * 1f;
+    }
+
+    protected override void Interact()
+    {
+        // Push enemy from where player is looking
+        Vector3 direction = Camera.main.transform.forward;
+        direction.y = 0f;
+        direction.Normalize();
+
+        knockbackTimer = knockbackDuration;
+        rb.linearVelocity = Vector3.zero;
+
+        // Force mode ignore enemy's mass
+        rb.AddForce(direction * GameManager.Instance.knockback, ForceMode.VelocityChange);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Wall"))
+        {
+            Die();
+        }
     }
 }

@@ -25,7 +25,7 @@ public class SunSpawner : MonoBehaviour
         {
             // Ask sun pool to get sun prefab
             SpawnSun();
-            spawnSunTimer = Random.Range(8, 10);
+            spawnSunTimer = Random.Range(6, 8);
         }
         else
         {

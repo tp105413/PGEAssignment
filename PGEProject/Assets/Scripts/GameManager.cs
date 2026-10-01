@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public bool isWaveRunning = false;
     public bool isHoldingItem = false;
+    public float knockback = 10f;
 
     public int level = 0;
     public int sunCount = 100;
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         ResetGame();
+        OnSunCountChanged?.Invoke(100);
     }
 
     // Update is called once per frame
@@ -73,18 +75,23 @@ public class GameManager : MonoBehaviour
         sunCount = 100;
         enemyCount = 3;
         enemyRemaining = 0;
-
-        UIManager.Instance.UpdateGeneralUI();
+        enemySpawner.spawnEnemyTimer = 20f;
+        
+        Time.timeScale = 1f;
+        // If need update level text or enemy remaning
     }
 
     void StartWave()
     {
+        if (isWaveRunning) return;
+
         isWaveRunning = true;
+        UIManager.Instance.UpdateLevelText();
 
         if(level == 0)
         {
             enemyRemaining = enemyCount;
-            UIManager.Instance.UpdateGeneralUI();
+            UIManager.Instance.UpdateEnemyRemaining();
         }
         else
         {
@@ -94,13 +101,16 @@ public class GameManager : MonoBehaviour
             // Every 2 level -2 secs spawn interval, minimum 2 secs
             enemySpawner.spawnInterval = Mathf.Max(16f - ((level - 1) / 2) * 2f, 2f);
 
-            UIManager.Instance.UpdateGeneralUI();
+            UIManager.Instance.UpdateEnemyRemaining();
         }
     }
 
     public void EnemiesDied()
     {
         enemyRemaining--;
+
+        // Speed up the pace
+        enemySpawner.SpawnNextEnemy();
 
         // Check if wave is end
         if(isWaveRunning && enemyCount <=0 && enemyRemaining <= 0)
@@ -114,6 +124,6 @@ public class GameManager : MonoBehaviour
         isWaveRunning = false;
         level++;
 
-        // Wave cleared UI add here
+        UIManager.Instance.waveClearedFade();
     }
 }
