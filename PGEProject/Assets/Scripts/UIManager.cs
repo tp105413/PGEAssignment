@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class UIManager : MonoBehaviour
     public TMP_Text levelText;
     public TMP_Text promptText;
     public TMP_Text gameOverText;
+    public TMP_Text winText;
+    public Button mainMenuButton;
+
 
 
     public GameObject itemHolded;
@@ -65,12 +69,20 @@ public class UIManager : MonoBehaviour
     public void GameOverUI()
     {
         gameOverText.gameObject.SetActive(true);
+        mainMenuButton.gameObject.SetActive(true);
+    }
+
+    public void WinUI()
+    {
+        winText.gameObject.SetActive(true);
+        mainMenuButton.gameObject.SetActive(true);
     }
 
     public void UpdateGeneralUI()
     {
         if(GameManager.Instance.level == 0)
         {
+            // Show tutorial if start the game first time
             Tutorial();
             enemyCountText.text = GameManager.Instance.enemyCount.ToString();
         }

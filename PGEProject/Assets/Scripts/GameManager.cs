@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        OnSunCountChanged?.Invoke(100);
+        ResetGame();
     }
 
     // Update is called once per frame
@@ -53,14 +53,28 @@ public class GameManager : MonoBehaviour
         OnSunCountChanged?.Invoke(sunCount);
     }
 
+    public void Win()
+    {
+        Time.timeScale = 0f;
+        UIManager.Instance.WinUI();
+    }
+
     public void GameOver()
     {
-        isWaveRunning = false;
-        level = 0;
         Time.timeScale = 0f;
         UIManager.Instance.GameOverUI();
+    }
 
-        // Reset game here
+    void ResetGame()
+    {
+        // Reset when change to game scene
+        isWaveRunning = false;
+        level = 0;
+        sunCount = 100;
+        enemyCount = 3;
+        enemyRemaining = 0;
+
+        UIManager.Instance.UpdateGeneralUI();
     }
 
     void StartWave()
@@ -88,6 +102,7 @@ public class GameManager : MonoBehaviour
     {
         enemyRemaining--;
 
+        // Check if wave is end
         if(isWaveRunning && enemyCount <=0 && enemyRemaining <= 0)
         {
             WaveCleared();
