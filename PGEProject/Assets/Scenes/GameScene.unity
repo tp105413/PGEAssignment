@@ -392,9 +392,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 184123333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9605661004b7629498f6426816563203, type: 3}
+  m_Script: {fileID: 11500000, guid: 29f29276b4584e049a230e9c7fc14940, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
+  m_EditorClassIdentifier: Assembly-CSharp::SunSpawner
   sunPrefab: {fileID: 6962034439273155825, guid: 632e09cd12013704cbfe80eeb4c97b2e, type: 3}
 --- !u!1 &251978788
 GameObject:
@@ -1582,7 +1582,7 @@ GameObject:
   - component: {fileID: 910078291}
   m_Layer: 0
   m_Name: Wall (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1831,7 +1831,7 @@ GameObject:
   - component: {fileID: 960329758}
   m_Layer: 0
   m_Name: Wall (3)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4273,7 +4273,7 @@ GameObject:
   - component: {fileID: 1882496040}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4660,7 +4660,7 @@ GameObject:
   - component: {fileID: 2100760344}
   m_Layer: 0
   m_Name: Wall (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

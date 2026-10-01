@@ -6,6 +6,10 @@ public class Collectible : MonoBehaviour
 {
     public float rotateSpeed;
     public float dropSpeed;
+    public float lifeTime = 100f;
+
+    float lifeTimer;
+    bool released;
 
     public UnityEvent OnSunCollected;
     
@@ -15,17 +19,14 @@ public class Collectible : MonoBehaviour
     void OnEnable()
     {
         OnSunCollected.AddListener(GameManager.Instance.AddSun);
+
+        lifeTimer = lifeTime;
+        released = false;
     }
 
     void OnDisable()
     {
         OnSunCollected.RemoveListener(GameManager.Instance.AddSun);
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
@@ -38,6 +39,13 @@ public class Collectible : MonoBehaviour
             Vector3 newPosition = transform.position;
             newPosition.y -= dropSpeed * Time.deltaTime;
             transform.position = newPosition;
+        }
+
+        // Release the sun if not pick up in 100 secs
+        lifeTimer -= Time.deltaTime;
+        if(lifeTimer <= 0f)
+        {
+            ReleaseSun();
         }
     }
 
@@ -57,6 +65,13 @@ public class Collectible : MonoBehaviour
     public void CollectSun()
     {
         OnSunCollected.Invoke();
+        sunPool.Release(this);
+    }
+
+    void ReleaseSun()
+    {
+        if (released) return;
+        released = true;
         sunPool.Release(this);
     }
 }

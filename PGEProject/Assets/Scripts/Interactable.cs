@@ -22,7 +22,7 @@ public abstract class Interactable : MonoBehaviour
 
     protected virtual void Interact()
     {
-
+        // Virtual function
     }
 
     public virtual bool CanInteract()

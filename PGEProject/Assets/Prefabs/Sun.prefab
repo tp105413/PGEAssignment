@@ -240,3 +240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Collectible
   rotateSpeed: 50
   dropSpeed: 2
+  lifeTime: 100
+  OnSunCollected:
+    m_PersistentCalls:
+      m_Calls: []

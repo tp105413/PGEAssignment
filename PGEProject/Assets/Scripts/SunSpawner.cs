@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class SpawnManager : MonoBehaviour
+public class SunSpawner : MonoBehaviour
 {
     public GameObject sunPrefab;
 
@@ -13,12 +13,7 @@ public class SpawnManager : MonoBehaviour
     void Awake()
     {
         sunPool = new ObjectPool<Collectible>(CreateSun, OnGetSun, OnReleaseSun);
-    }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
@@ -26,10 +21,10 @@ public class SpawnManager : MonoBehaviour
     {
         if (!GameManager.Instance.isWaveRunning) return;
 
-        if(spawnSunTimer < 0f)
+        if (spawnSunTimer < 0f)
         {
             // Ask sun pool to get sun prefab
-            sunPool.Get();
+            SpawnSun();
             spawnSunTimer = Random.Range(8, 10);
         }
         else
@@ -40,8 +35,9 @@ public class SpawnManager : MonoBehaviour
 
     Collectible SpawnSun()
     {
-        Collectible sun = Instantiate(sunPrefab.GetComponent<Collectible>(),
-                        new Vector3(Random.Range(transform.position.x, transform.position.x + 50),
+        Collectible sun = sunPool.Get();
+
+        sun.transform.SetPositionAndRotation(new Vector3(Random.Range(transform.position.x, transform.position.x + 50),
                         transform.position.y + 15, Random.Range(transform.position.z, transform.position.z + 50)),
                         Quaternion.identity);
 
@@ -50,17 +46,13 @@ public class SpawnManager : MonoBehaviour
 
     public Collectible CreateSun()
     {
-        Collectible sun = SpawnSun();
+        Collectible sun = Instantiate(sunPrefab.GetComponent<Collectible>());
         sun.SetSunPool(sunPool);
         return sun;
     }
 
     public void OnGetSun(Collectible sun)
     {
-        // Spawn at new position
-        sun.transform.position = new Vector3(Random.Range(transform.position.x, transform.position.x + 50),
-                        transform.position.y + 15, Random.Range(transform.position.z, transform.position.z + 50));
-
         sun.gameObject.SetActive(true);
     }
 

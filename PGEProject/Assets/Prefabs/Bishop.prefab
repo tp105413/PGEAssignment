@@ -236,6 +236,7 @@ GameObject:
   - component: {fileID: 1092488385464178707}
   - component: {fileID: 6585829344920675616}
   - component: {fileID: 1934296915233310211}
+  - component: {fileID: 1328530280474158127}
   m_Layer: 0
   m_Name: Bishop
   m_TagString: Untagged
@@ -339,6 +340,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1328530280474158127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6708483832854160989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2b29723c6800dd4b96a79c2e9958ff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BulletSpawner
+  bulletPrefab: {fileID: 4829592428104319597, guid: 78eb3561f50ddf64799db36bd4a30376, type: 3}
+  fireInterval: 1.4
+  firePattern: 2
 --- !u!1 &7049360087018963411
 GameObject:
   m_ObjectHideFlags: 0
