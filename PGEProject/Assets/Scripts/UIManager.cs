@@ -1,7 +1,8 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class UIManager : MonoBehaviour
     public TMP_Text gameOverText;
     public TMP_Text winText;
     public Button mainMenuButton;
+    public GameObject tutorialBg;
+    public TMP_Text tutorialText;
+    public CanvasGroup tutorialTextCG;
 
     // Wave cleared UI
     public CanvasGroup waveClearedText;
@@ -22,6 +26,8 @@ public class UIManager : MonoBehaviour
     public Material PawnMaterial;
     public Material RookMaterial;
     public Material BishopMaterial;
+
+    int tutorialStep = 0;
 
 
     void OnEnable()
@@ -37,6 +43,16 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (tutorialStep == 0 && Keyboard.current.fKey.wasPressedThisFrame)
+        {
+            tutorialText.text = "Collect Sun";
+            StartCoroutine(TutorialStart());
+        }
     }
 
     void UpdateSunCount(int amount)
@@ -113,26 +129,50 @@ public class UIManager : MonoBehaviour
     // Show wave cleared text with fade in and out
     public void waveClearedFade()
     {
-        StartCoroutine(StartFade());
+        StartCoroutine(StartFade(5));
     }
 
-    private IEnumerator StartFade()
+    IEnumerator StartFade(float sec)
     {
-        yield return StartCoroutine(Fade(0f, 1f));
-        yield return new WaitForSeconds(5f);
-        yield return StartCoroutine(Fade(1f, 0f));
+        yield return StartCoroutine(Fade(0f, 1f, waveClearedText));
+        yield return new WaitForSeconds(sec);
+        yield return StartCoroutine(Fade(1f, 0f, waveClearedText));
     }
 
-    private IEnumerator Fade(float start, float end)
+    IEnumerator Fade(float start, float end, CanvasGroup text)
     {
         float timer = 0f;
 
         while (timer < 0.5f)
         {
             timer += Time.deltaTime;
-            waveClearedText.alpha = Mathf.Lerp(start, end, timer / 0.5f);
+            text.alpha = Mathf.Lerp(start, end, timer / 0.5f);
             yield return null;
         }
-        waveClearedText.alpha = end;
+        text.alpha = end;
+    }
+
+    IEnumerator TutorialStart()
+    {
+        yield return StartCoroutine(Fade(1f, 0f, tutorialTextCG));
+        tutorialText.text = "Collect Sun";
+        yield return StartCoroutine(Fade(0f, 1f, tutorialTextCG));
+
+        yield return new WaitForSeconds(12f);
+
+        yield return StartCoroutine(Fade(1f, 0f, tutorialTextCG));
+        tutorialText.text = "Buy Pawn Tower";
+        yield return StartCoroutine(Fade(0f, 1f, tutorialTextCG));
+
+        yield return new WaitForSeconds(5f);
+
+        yield return StartCoroutine(Fade(1f, 0f, tutorialTextCG));
+        tutorialText.text = "Defend your Red Zone Good Luck!";
+        yield return StartCoroutine(Fade(0f, 1f, tutorialTextCG));
+
+        yield return new WaitForSeconds(5f);
+
+        tutorialText.gameObject.SetActive(false);
+        tutorialBg.gameObject.SetActive(false);
     }
 }

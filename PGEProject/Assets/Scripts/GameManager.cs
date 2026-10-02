@@ -59,12 +59,19 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         UIManager.Instance.WinUI();
+
+        // Bring back mouse cursor
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void GameOver()
     {
         Time.timeScale = 0f;
         UIManager.Instance.GameOverUI();
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     void ResetGame()

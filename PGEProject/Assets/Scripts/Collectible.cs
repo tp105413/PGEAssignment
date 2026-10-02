@@ -10,6 +10,7 @@ public class Collectible : MonoBehaviour
 
     float lifeTimer;
     bool released;
+    float sunAmount = 25;
 
     public UnityEvent OnSunCollected;
     

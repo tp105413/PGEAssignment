@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Enemy : Interactable
 {
@@ -8,11 +9,13 @@ public class Enemy : Interactable
     float knockbackTimer;
     bool isDead = false;
     Rigidbody rb;
+    Animator animator;
 
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void FixedUpdate()
@@ -49,11 +52,22 @@ public class Enemy : Interactable
         if (isDead) return;
         isDead = true;
 
+        // Add 50 Sun per enemy dead
         GameManager.Instance.AddSun();
+        GameManager.Instance.AddSun();
+
         GameManager.Instance.EnemiesDied();
-        Destroy(gameObject);
+        animator.SetBool("IsDead", true);
+        StartCoroutine(DestroyAfterDeadAnimation());
 
         UIManager.Instance.UpdateEnemyRemaining();
+    }
+
+    // Destroy after dead animation completed
+    IEnumerator DestroyAfterDeadAnimation()
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
     }
 
     public void SetLevel(int level)
@@ -85,5 +99,11 @@ public class Enemy : Interactable
         {
             Die();
         }
+    }
+
+    public override bool CanInteract()
+    {
+        // Check if player is not holding item
+        return !GameManager.Instance.isHoldingItem;
     }
 }

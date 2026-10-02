@@ -75,17 +75,17 @@ public class Tower : MonoBehaviour
                 SpawnBullet(180f);
                 break;
             case FirePattern.Cross:
-                SpawnBullet(0f);
-                SpawnBullet(90f);
-                SpawnBullet(180f);
-                SpawnBullet(270f);
+                SpawnBullet(55f);
+                SpawnBullet(125f);
+                SpawnBullet(235f);
+                SpawnBullet(305f);
                 break;
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Enemy"))
+        if (collision.collider.CompareTag("Enemy"))
         {
             Destroy(gameObject);
         }

@@ -23,7 +23,7 @@ public class BonusItem : Interactable
                 if (GameManager.Instance.sunCount >= cost)
                 {
                     GameManager.Instance.SpendSun(cost);
-                    GameManager.Instance.knockback = 1000f;
+                    GameManager.Instance.knockback = 500f;
                 }
                 break;
         }
